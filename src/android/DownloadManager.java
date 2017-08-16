@@ -50,7 +50,7 @@ public class DownloadManager extends CordovaPlugin {
             request.setTitle(filename);
             //Set a description of this download, to be displayed in notifications (if enabled)
             request.setDescription("DataSync File Download.");
-            request.addRequestHeader("X-Custom-Auth", auth);
+            request.addRequestHeader("Authorization", auth);
             //Set the local destination for the downloaded file to a path within the application's external files directory
             request.setDestinationInExternalFilesDir(cordova.getActivity().getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, filename);
             //Set visiblity after download is complete
