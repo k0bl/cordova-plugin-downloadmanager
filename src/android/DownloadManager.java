@@ -25,7 +25,7 @@ public class DownloadManager extends CordovaPlugin {
             String message = args.getString(0);
             String auth = args.getString(1);
             String filename = args.getString(2);
-            this.startDownload(message, auth, callbackContext);
+            this.startDownload(message, auth, filename, callbackContext);
             return true;
         }
         return false;
