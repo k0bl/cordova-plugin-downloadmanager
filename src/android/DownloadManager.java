@@ -46,8 +46,7 @@ public class DownloadManager extends CordovaPlugin {
             request.setDescription("Biodoc File Download.");
             request.addRequestHeader("Authorization", auth);
             //Set the local destination for the downloaded file to a path within the application's external files directory
-
-            request.setDestinationInExternalFilesDir(cordova.getActivity().getApplicationContext(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
+            request.setDestinationInExternalPublicDir(cordova.getActivity().getApplicationContext(), Environment.DIRECTORY_DOWNLOADS, filename);
 
             //Set visiblity after download is complete
             request.setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
