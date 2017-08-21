@@ -25,13 +25,14 @@ public class DownloadManager extends CordovaPlugin {
             String message = args.getString(0);
             String auth = args.getString(1);
             String filename = args.getString(2);
-            this.startDownload(message, auth, filename, callbackContext);
+            String mimetype = args.getString(3);
+            this.startDownload(message, auth, filename, mimetype, callbackContext);
             return true;
         }
         return false;
     }
 
-    private void startDownload(String message, String auth, String filename, CallbackContext callbackContext) {
+    private void startDownload(String message, String auth, String filename, String mimetype, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             android.app.DownloadManager downloadManager = (android.app.DownloadManager) cordova.getActivity().getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
             Uri Download_Uri = Uri.parse(message);
@@ -47,7 +48,7 @@ public class DownloadManager extends CordovaPlugin {
             request.addRequestHeader("Authorization", auth);
             //Set the local destination for the downloaded file to a path within the application's external files directory
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
-
+            request.setMimeType(mimetype);
             //Set visiblity after download is complete
             request.setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             long downloadReference = downloadManager.enqueue(request);
