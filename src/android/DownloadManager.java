@@ -26,13 +26,14 @@ public class DownloadManager extends CordovaPlugin {
             String auth = args.getString(1);
             String filename = args.getString(2);
             String mimetype = args.getString(3);
-            this.startDownload(message, auth, filename, mimetype, callbackContext);
+            String aspect = args.getString(4);
+            this.startDownload(message, auth, filename, mimetype, aspect, callbackContext);
             return true;
         }
         return false;
     }
 
-    private void startDownload(String message, String auth, String filename, String mimetype, CallbackContext callbackContext) {
+    private void startDownload(String message, String auth, String filename, String mimetype, String aspect, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             android.app.DownloadManager downloadManager = (android.app.DownloadManager) cordova.getActivity().getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
             Uri Download_Uri = Uri.parse(message);
@@ -46,6 +47,7 @@ public class DownloadManager extends CordovaPlugin {
             //Set a description of this download, to be displayed in notifications (if enabled)
             request.setDescription("Biodoc File Download.");
             request.addRequestHeader("Authorization", auth);
+            request.addRequestHeader("X-Aspect-Id", aspect);
             //Set the local destination for the downloaded file to a path within the application's external files directory
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
             request.setMimeType(mimetype);
